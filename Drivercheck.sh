@@ -10,26 +10,23 @@
 
 clear
 hardware=$(lspci | grep -i nvidia | cut -d '[' -f2 | cut -d ']' -f1)
-echo "${NUMBER}Hardware installed: $hardware ${END}"
 test=$(nvidia-smi)
 if [ $? = 127 ]
 then
 echo "${RED_TEXT}No driver seems to be installed ${END}"
-latestdrive=$(curl http://www.nvidia.com/object/unix.html | grep -i "Latest short Lived Branch" | grep -i -m 1 version | cut -d '>' -f2 | cut -d '<' -f1)
-do
-echo "The suggested driver for $hardware is $latestdrive"
-else
-echo ""
-fi
-done
+latestdriver=$(curl http://www.nvidia.com/object/unix.html | grep -i "Latest short Lived Branch" | grep -i -m 1 version | cut -d '>' -f2 | cut -d '<' -f1)
+echo "The suggested driver for $hardware is $latestdriver"
 else
 driver=$(nvidia-smi | grep -i driver | cut -d ':' -f2 | cut -d '|' -f1 | sed -e 's/^[[:space:]]*//')
+latestdriver=$(curl http://www.nvidia.com/object/unix.html | grep -i "Latest short Lived Branch" | grep -i -m 1 version | cut -d '>' -f2 | cut -d '<' -f1)
+clear
+echo "${NUMBER}Hardware installed: $hardware ${END}"
 echo "${NUMBER}Driver installed: $driver ${END}"
+echo "${NUMBER}Latest driver available: $latestdriver ${END}"
+if [ $driver = $latestdriver ]
+then
+echo "${NUMBER}Your driver is up to date${END}"
+else
+echo "${NUMBER}Your driver is not latest version ( $latestdriver )${END}"
 fi
-
-#apt=$(apt-cache search $newdriver)
-#echo "suggesting driver: $apt"
-#else
-#echo "Fail"
-#fi
-#done
+fi
