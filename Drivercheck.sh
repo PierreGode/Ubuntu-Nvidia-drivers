@@ -1,3 +1,4 @@
+
 # ~~~~~~~~~~  Environment Setup ~~~~~~~~~~ #
     NORMAL=`echo "\033[m"`
     MENU=`echo "\033[36m"` #Blue
@@ -11,6 +12,14 @@
 clear
 hardware=$(lspci | grep -i nvidia | cut -d '[' -f2 | cut -d ']' -f1)
 test=$(nvidia-smi)
+checkfoNvidia=$(lspci | grep -i nvidia | cut -d ':' -f3 | cut -d 'C' -f1 | sed -e 's/^[[:space:]]*//')
+if[ $checkfoNvidia = NVIDIA )
+then
+echo ""
+else
+echo "${RED_TEXT}NO NVIDIA card detected ${END}"
+exit
+fi
 if [ $? = 127 ]
 then
 echo "${RED_TEXT}No driver seems to be installed ${END}"
