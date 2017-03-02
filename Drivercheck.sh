@@ -11,15 +11,16 @@
 
 clear
 hardware=$(lspci | grep -i nvidia | cut -d '[' -f2 | cut -d ']' -f1)
-test=$(nvidia-smi)
-checkfoNvidia=$(lspci | grep -i nvidia | cut -d ':' -f3 | cut -d 'C' -f1 | sed -e 's/^[[:space:]]*//')
-if[ $checkfoNvidia = NVIDIA )
+checkforNvidia=$(lspci | grep -i nvidia | cut -d ':' -f3 | cut -d 'C' -f1 | sed -e 's/^[[:space:]]*//')
+echo $checkforNvidia
+if [ "$checkforNvidia" = NVIDIA ]
 then
-echo ""
+echo "Nvidia card detected"
 else
 echo "${RED_TEXT}NO NVIDIA card detected ${END}"
 exit
 fi
+test=$(nvidia-smi)
 if [ $? = 127 ]
 then
 echo "${RED_TEXT}No driver seems to be installed ${END}"
