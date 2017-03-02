@@ -15,18 +15,25 @@ test=$(nvidia-smi)
 if [ $? = 127 ]
 then
 echo "${RED_TEXT}No driver seems to be installed ${END}"
+cat list.txt | cut -d '=' -f2 | while read output
+do
+if [ "$hardware" = "$output" ]
+then
+newdriver=$(cat list.txt | grep -i "$output" | cut -d '=' -f1)
+clear
+echo "The suggested driver for $hardware is $newdriver"
+else
+echo "fuck"
+fi
+done
 else
 driver=$(nvidia-smi | grep -i driver | cut -d ':' -f2 | cut -d '|' -f1 | sed -e 's/^[[:space:]]*//')
 echo "${NUMBER}Driver installed: $driver ${END}"
 fi
 
-cat list.txt | while read output
-do
-if [ "$hardware" = "$output" ]
-then
-echo "The suggested driver for $hardware is $output"
-apt=$(apt-cache search $newdriver)
-echo "suggesting driver: $apt"
-else
-echo "Fail"
-fi
+#apt=$(apt-cache search $newdriver)
+#echo "suggesting driver: $apt"
+#else
+#echo "Fail"
+#fi
+#done
