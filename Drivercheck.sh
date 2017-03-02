@@ -15,15 +15,11 @@ test=$(nvidia-smi)
 if [ $? = 127 ]
 then
 echo "${RED_TEXT}No driver seems to be installed ${END}"
-cat list.txt | cut -d '=' -f2 | while read output
+latestdrive=$(curl http://www.nvidia.com/object/unix.html | grep -i "Latest short Lived Branch" | grep -i -m 1 version | cut -d '>' -f2 | cut -d '<' -f1)
 do
-if [ "$hardware" = "$output" ]
-then
-newdriver=$(cat list.txt | grep -i "$output" | cut -d '=' -f1)
-clear
-echo "The suggested driver for $hardware is $newdriver"
+echo "The suggested driver for $hardware is $latestdrive"
 else
-echo "fuck"
+echo ""
 fi
 done
 else
