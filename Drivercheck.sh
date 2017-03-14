@@ -11,7 +11,7 @@
 
 clear
 hardware=$(lspci | grep -i nvidia | cut -d '[' -f2 | cut -d ']' -f1)
-checkforNvidia=$(lspci | grep -i nvidia | cut -d ':' -f3 | cut -d 'C' -f1 | sed -e 's/^[[:space:]]*//')
+checkforNvidia=$(lspci | grep -i -m 1 nvidia | cut -d ':' -f3 | cut -d 'C' -f1 | sed -e 's/^[[:space:]]*//')
 if [ $checkforNvidia = NVIDIA ]
 then
 echo "Nvidia card detected"
