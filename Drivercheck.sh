@@ -19,10 +19,17 @@ else
 echo "${RED_TEXT}NO NVIDIA card detected ${END}"
 exit
 fi
+aptnvidia=$(sudo apt list --installed | grep -m 1-i nvidia | cut -d 'a' -f1 )
+if [ $aptnvidia = nvidi ]
+then
+echo "${NUMBER}Found Nvidia pakages: $aptnvidia ${END}"
+else
+echo "${RED_TEXT}No Nvidia pakages seems to be installed ${END}"
+fi
 test=$(nvidia-smi)
 if [ $? = 127 ]
 then
-echo "${RED_TEXT}No driver seems to be installed ${END}"
+echo "${RED_TEXT}No nvidia-smi seems to be installed ${END}"
 latestdriver=$(curl http://www.nvidia.com/object/unix.html | grep -i "Latest short Lived Branch" | grep -i -m 1 version | cut -d '>' -f2 | cut -d '<' -f1)
 echo "The suggested driver for $hardware is $latestdriver"
 else
