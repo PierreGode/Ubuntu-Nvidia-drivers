@@ -25,7 +25,7 @@ else
 echo "${RED_TEXT}No Nvidia pakages seems to be installed ${END}"
 fi
 test=$(nvidia-smi)
-echo $test
+echo "$test"
 clear
 if [ $? = 127 ]
 then
@@ -39,7 +39,7 @@ clear
 echo "${NUMBER}Hardware installed: $hardware ${END}"
 echo "${NUMBER}Driver installed: $driver ${END}"
 echo "${NUMBER}Latest driver available: $latestdriver ${END}"
-if [ "$driver" = $latestdriver ]
+if [ "$driver" = "$latestdriver" ]
 then
 echo "${NUMBER}Your driver is up to date${END}"
 else
