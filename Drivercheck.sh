@@ -25,6 +25,8 @@ else
 echo "${RED_TEXT}No Nvidia pakages seems to be installed ${END}"
 fi
 test=$(nvidia-smi)
+echo $test
+clear
 if [ $? = 127 ]
 then
 echo "${RED_TEXT}No nvidia-smi seems to be installed ${END}"
