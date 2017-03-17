@@ -10,7 +10,7 @@
 clear
 hardware=$(lspci | grep -i nvidia | cut -d '[' -f2 | cut -d ']' -f1)
 checkforNvidia=$(lspci | grep -i -m 1 nvidia | cut -d ':' -f3 | cut -d 'C' -f1 | sed -e 's/^[[:space:]]*//')
-if [ $checkforNvidia = NVIDIA ]
+if [ "$checkforNvidia" = NVIDIA ]
 then
 echo "Nvidia card detected"
 else
@@ -18,7 +18,7 @@ echo "${RED_TEXT}NO NVIDIA card detected ${END}"
 exit
 fi
 aptnvidia=$(sudo apt list --installed | grep -m 1-i nvidia | cut -d 'a' -f1 )
-if [ $aptnvidia = nvidi ]
+if [ "$aptnvidia" = nvidi ]
 then
 echo "${NUMBER}Found Nvidia pakages: $aptnvidia ${END}"
 else
@@ -39,7 +39,7 @@ clear
 echo "${NUMBER}Hardware installed: $hardware ${END}"
 echo "${NUMBER}Driver installed: $driver ${END}"
 echo "${NUMBER}Latest driver available: $latestdriver ${END}"
-if [ $driver = $latestdriver ]
+if [ "$driver" = $latestdriver ]
 then
 echo "${NUMBER}Your driver is up to date${END}"
 else
