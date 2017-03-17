@@ -1,11 +1,11 @@
-
+#!/bin/bash
 # ~~~~~~~~~~  Environment Setup ~~~~~~~~~~ #
-    NORMAL=`echo "\033[m"`
-    MENU=`echo "\033[36m"` #Blue
-    NUMBER=`echo "\033[33m"` #yellow
-    RED_TEXT=`echo "\033[31m"` #Red
-    INTRO_TEXT=`echo "\033[32m"` #green and white text
-    END=`echo "\033[0m"`
+    NORMAL=$(echo "\033[m")
+    MENU=$(echo "\033[36m") #Blue
+    NUMBER=$(echo "\033[33m") #yellow
+    RED_TEXT=$(echo "\033[31m") #Red
+    INTRO_TEXT=$(echo "\033[32m") #green and white text
+    END=$(echo "\033[0m")
 # ~~~~~~~~~~  Environment Setup ~~~~~~~~~~ #
 
 
